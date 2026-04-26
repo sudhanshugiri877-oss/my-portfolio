@@ -2,337 +2,305 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,inital-scale=1.0">
-    <title>My Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudhanshu Giri — Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <style>
-        /* --- Contact Section Layout --- */
-        .contact-section {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding-top: 2rem;
-            padding-bottom: 5rem;
-            min-height: 30vh;
-            background: #b9bfc5;
-            width: 100%;
-        }
-
-        .contact-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            position: relative;
-            z-index: 10;
-        }
-
-        /* Talk to Me Button */
-        .talk-btn {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            min-width: 250px;
-            padding: 1.5rem 4rem;
-            font-size: 2.2rem;
-            background: #515151;
-            border: 2px solid #323d3d;
-            border-radius: 8px;
-            color: #fff;
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-            transition: background 0.4s ease, color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            white-space: nowrap;
-            font-family: inherit;
-        }
-
-        .talk-btn:hover {
-            background: #fff;
-            color: #515151;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
-
-        /* Icons container — always occupies space so layout is stable */
-        .reveal-links {
-            display: flex;
-            gap: 2.5rem;
-            margin-top: 2.5rem;
-            min-height: 70px;
-            align-items: center;
-        }
-
-        /* Each icon — hidden and displaced by default */
-        .reveal-links a {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            width: 60px;
-            height: 60px;
-            background: #fff;
-            border: 2px solid #515151;
-            border-radius: 50%;
-            font-size: 2.8rem;
-            color: #515151;
-            text-decoration: none;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            opacity: 0;
-            pointer-events: none;
-            /* Default resting displacement (will be overridden per icon) */
-            transform: translate(0, -220px) scale(0.3);
-            transition: background 0.3s ease, color 0.3s ease;
-        }
-
-        /* LinkedIn — comes from upper-left */
-        .reveal-links a.icon-linkedin {
-            transform: translate(-240px, -180px) scale(0.3);
-        }
-
-        /* Gmail — comes from directly above */
-        .reveal-links a.icon-gmail {
-            transform: translate(0, -260px) scale(0.3);
-        }
-
-        /* Instagram — comes from upper-right */
-        .reveal-links a.icon-instagram {
-            transform: translate(240px, -180px) scale(0.3);
-        }
-
-        /* === ACTIVE STATE: icons bounce into place === */
-        .reveal-links.active a {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .reveal-links.active a.icon-linkedin {
-            animation: bounceInLeft 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.00s forwards;
-        }
-
-        .reveal-links.active a.icon-gmail {
-            animation: bounceInTop  0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.13s forwards;
-        }
-
-        .reveal-links.active a.icon-instagram {
-            animation: bounceInRight 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.26s forwards;
-        }
-
-        /* === HIDING STATE: icons fly back out === */
-        .reveal-links.hiding a.icon-linkedin {
-            opacity: 1;
-            pointer-events: none;
-            animation: flyOutLeft  0.4s ease-in 0.00s forwards;
-        }
-
-        .reveal-links.hiding a.icon-gmail {
-            opacity: 1;
-            pointer-events: none;
-            animation: flyOutTop   0.4s ease-in 0.08s forwards;
-        }
-
-        .reveal-links.hiding a.icon-instagram {
-            opacity: 1;
-            pointer-events: none;
-            animation: flyOutRight 0.4s ease-in 0.16s forwards;
-        }
-
-        /* === Bounce-in keyframes === */
-        @keyframes bounceInLeft {
-            0%   { opacity: 0; transform: translate(-240px, -180px) scale(0.3); }
-            60%  { opacity: 1; transform: translate(10px, 8px) scale(1.15); }
-            75%  { transform: translate(-6px, -4px) scale(0.94); }
-            88%  { transform: translate(4px, 2px) scale(1.05); }
-            100% { opacity: 1; transform: translate(0, 0) scale(1); }
-        }
-
-        @keyframes bounceInTop {
-            0%   { opacity: 0; transform: translate(0, -260px) scale(0.3); }
-            60%  { opacity: 1; transform: translate(0, 12px) scale(1.15); }
-            75%  { transform: translate(0, -7px) scale(0.94); }
-            88%  { transform: translate(0, 4px) scale(1.05); }
-            100% { opacity: 1; transform: translate(0, 0) scale(1); }
-        }
-
-        @keyframes bounceInRight {
-            0%   { opacity: 0; transform: translate(240px, -180px) scale(0.3); }
-            60%  { opacity: 1; transform: translate(-10px, 8px) scale(1.15); }
-            75%  { transform: translate(6px, -4px) scale(0.94); }
-            88%  { transform: translate(-4px, 2px) scale(1.05); }
-            100% { opacity: 1; transform: translate(0, 0) scale(1); }
-        }
-
-        /* === Fly-out keyframes === */
-        @keyframes flyOutLeft {
-            0%   { opacity: 1; transform: translate(0, 0) scale(1); }
-            100% { opacity: 0; transform: translate(-240px, -180px) scale(0.3); }
-        }
-
-        @keyframes flyOutTop {
-            0%   { opacity: 1; transform: translate(0, 0) scale(1); }
-            100% { opacity: 0; transform: translate(0, -260px) scale(0.3); }
-        }
-
-        @keyframes flyOutRight {
-            0%   { opacity: 1; transform: translate(0, 0) scale(1); }
-            100% { opacity: 0; transform: translate(240px, -180px) scale(0.3); }
-        }
-
-        /* Hover glow on icons when visible */
-        .reveal-links.active a:hover {
-            background: #515151 !important;
-            color: #fff !important;
-            transform: scale(1.18) !important;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.25) !important;
-        }
-    </style>
 </head>
 <body>
-    <header class="header">
-        <a href="#" class="logo">{Sudhanshu Giri}.</a>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <a href="#home" class="logo">{Sudhanshu Giri}.</a>
         <nav class="navbar">
-            <a href="#home" class="active">Home</a>
-            <a href="#about">About</a>
-            <a href="#projects">Projects</a>
-            <a href="#skills">Skills</a>
-            <a href="#Contact">Contact</a>
+            <a href="#home" class="active" data-section="home">Home</a>
+            <a href="#about" data-section="about">About</a>
+            <a href="#projects" data-section="projects">Projects</a>
+            <a href="#skills" data-section="skills">Skills</a>
+            <a href="#contact" data-section="contact">Contact</a>
         </nav>
     </header>
 
-    <section class="home">
-        <div class="home--content">
-            <h1>Hi. I'm Sudhanshu Dattatray Giri</h1>
-            <h3>Electronics and Telecommunication Engineering Student</h3>
+    <!-- Home -->
+    <section class="home" id="home">
+        <div class="home-content">
+            <h1>Hi. I'm Sudhanshu<br>Dattatray Giri</h1>
+            <h3>Electronics &amp; Telecommunication<br>Engineering Student</h3>
             <p>Driven ENTC student focused on building intelligent systems through electronics and software.</p>
         </div>
 
         <div class="home-sci">
-            <a href="https://www.linkedin.com/in/sudhanshu-giri-7b2751405/"><i class='bx bxl-linkedin'></i></a>
+            <a href="https://www.linkedin.com/in/sudhanshu-giri-7b2751405/" target="_blank"><i class='bx bxl-linkedin'></i></a>
             <a href="mailto:sudhanshugiri877@gmail.com"><i class='bx bxl-gmail'></i></a>
-            <a href="https://www.instagram.com/daredevilsmuffy?igsh=MW1tMXAxMzU1cWxsMg=="><i class='bx bxl-instagram'></i></a>
+            <a href="https://www.instagram.com/daredevilsmuffy?igsh=MW1tMXAxMzU1cWxsMg==" target="_blank"><i class='bx bxl-instagram'></i></a>
         </div>
 
-        <span class="home-imgHover">
-            <div class="home-imgHover">
-                <div class="profile-circle">
-                    <img src="/Users/sudhanshugri/Downloads/WhatsApp Image 2026-04-13 at 15.29.17.jpeg" alt="Sudhanshu Giri" />
-                </div>
+        <div class="home-img">
+            <div class="profile-circle">
+                <img src="/Users/sudhanshugiri/Downloads/electronics-and-communication-1.jpg" alt="Sudhanshu Giri" />
             </div>
-        </span>
+        </div>
     </section>
 
+    <!-- Projects -->
     <section class="projects" id="projects">
-        <h2 class="heading">Latest <span>Projects</span></h2>
+        <h2 class="heading reveal">Latest <span>Projects</span></h2>
         <div class="projects-container">
-            <div class="project-box">
+
+            <div class="project-box reveal" data-category="Hardware">
+                <div class="project-accent"></div>
                 <div class="project-info">
-                    <h4>Water monitoring system</h4>
-                    <p>Device that detects temperature and Ph level of water and warns if its unhealthy.</p>
+                    <span class="project-tag">Hardware</span>
+                    <h4>Water Monitoring System</h4>
+                    <p>Detects temperature and pH level of water and warns if it's unhealthy.</p>
                 </div>
             </div>
-            <div class="project-box">
+
+            <div class="project-box reveal" data-category="Software">
+                <div class="project-accent"></div>
                 <div class="project-info">
+                    <span class="project-tag">Software</span>
                     <h4>Daily Expenses Tracker</h4>
-                    <p>An application which will keep track of your daily expenses.</p>
+                    <p>An application that keeps track of your daily expenses.</p>
                     <a href="#" class="project-btn">View Live</a>
                 </div>
             </div>
-            <div class="project-box">
+
+            <div class="project-box reveal" data-category="Hardware">
+                <div class="project-accent"></div>
                 <div class="project-info">
+                    <span class="project-tag">Hardware</span>
                     <h4>Piezoelectric Tile Generator</h4>
-                    <p>Floor made of Piezoelectric sensors that converts motion into electrical energy.</p>
+                    <p>Floor made of piezoelectric sensors that converts motion into electrical energy.</p>
                 </div>
             </div>
-            <div class="project-box">
+
+            <div class="project-box reveal" data-category="Hardware">
+                <div class="project-accent"></div>
                 <div class="project-info">
-                    <h4>Passenger safety system</h4>
-                    <p>A device ensures that car doesn't turn on if passenger hasn't worn seatbelt.</p>
+                    <span class="project-tag">Hardware</span>
+                    <h4>Passenger Safety System</h4>
+                    <p>Ensures a car doesn't start if the passenger hasn't worn a seatbelt.</p>
                 </div>
             </div>
-            <div class="project-box">
+
+            <div class="project-box reveal" data-category="Hardware">
+                <div class="project-accent"></div>
                 <div class="project-info">
+                    <span class="project-tag">Hardware</span>
                     <h4>Patient Monitoring System</h4>
-                    <p>Warns if patient is having unstable health condition.</p>
+                    <p>Warns if a patient is experiencing an unstable health condition.</p>
                 </div>
             </div>
-            <div class="project-box">
+
+            <div class="project-box reveal" data-category="Software">
+                <div class="project-accent"></div>
                 <div class="project-info">
+                    <span class="project-tag">Software</span>
                     <h4>Portfolio</h4>
-                    <p>Made a portfolio of myself using html and css.</p>
+                    <p>Personal portfolio built with HTML and CSS showcasing projects and skills.</p>
                     <a href="#" class="project-btn">View Live</a>
                 </div>
             </div>
+
         </div>
     </section>
 
+    <!-- About -->
     <section class="about" id="about">
-        <h2 class="heading">About <span>Me</span></h2>
+        <h2 class="heading reveal">About <span>Me</span></h2>
         <div class="about-container">
-            <div class="about-strip-box">
+
+            <div class="about-strip-box reveal">
                 <div class="about-info">
                     <h4><i class='bx bxs-graduation'></i> Education</h4>
                     <p><strong>MIT Academy of Engineering, Alandi, Pune</strong> — Currently pursuing a degree in Electronics and Telecommunication Engineering. Expected to graduate in 2029.</p>
                 </div>
             </div>
-            <div class="about-strip-box">
+
+            <div class="about-strip-box reveal">
                 <div class="about-info">
-                    <h4><i class='bx bx-user'></i> 11th and 12th</h4>
-                    <p><strong>Spring Dales Jr. College, Chh.Sambhajinagar</strong> — Passed out 11th and 12th from this College.</p>
+                    <h4><i class='bx bx-book'></i> 11th and 12th</h4>
+                    <p><strong>Spring Dales Jr. College, Chh.Sambhajinagar</strong> — Completed 11th and 12th from this college.</p>
                 </div>
             </div>
-            <div class="about-strip-box">
+
+            <div class="about-strip-box reveal">
                 <div class="about-info">
-                    <h4><i class='bx bx-user'></i> 10th</h4>
-                    <p><strong>Ace Academy C.B.S.E School, Chh.Sambhajinagar</strong> — Passed out 10th from this College.</p>
+                    <h4><i class='bx bx-pencil'></i> 10th</h4>
+                    <p><strong>Ace Academy C.B.S.E School, Chh.Sambhajinagar</strong> — Completed 10th from this school.</p>
                 </div>
             </div>
-            <div class="about-strip-box">
+
+            <div class="about-strip-box reveal">
                 <div class="about-info">
-                    <h4><i class='bx bx-user'></i> Certifications</h4>
-                    <p><strong>Anthropic</strong> — AI Fluency for Nonprofits<br>
-                       <strong>Anthropic</strong> — AI Fluency for Students<br>
-                       <strong>Anthropic</strong> — AI Fluency Framework &amp; Foundations<br>
-                       <strong>Anthropic</strong> — Claude 101<br>
-                       <strong>IBM</strong> — Python Essentials 1 &amp; 2<br>
-                       <strong>IBM</strong> — Career Management Essential</p>
+                    <h4><i class='bx bx-certification'></i> Certifications</h4>
+                    <p>
+                        <strong>Anthropic</strong> — AI Fluency for Nonprofits &nbsp;·&nbsp;
+                        <strong>Anthropic</strong> — AI Fluency for Students &nbsp;·&nbsp;
+                        <strong>Anthropic</strong> — AI Fluency Framework &amp; Foundations &nbsp;·&nbsp;
+                        <strong>Anthropic</strong> — Claude 101 &nbsp;·&nbsp;
+                        <strong>IBM</strong> — Python Essentials 1 &amp; 2 &nbsp;·&nbsp;
+                        <strong>IBM</strong> — Career Management Essential
+                    </p>
                 </div>
             </div>
+
         </div>
     </section>
 
-    <section class="about" id="skills">
-        <h2 class="heading">My <span>Skills</span></h2>
+    <!-- Skills -->
+    <section class="skills-section" id="skills">
+        <h2 class="heading reveal">My <span>Skills</span></h2>
         <div class="skills-grid">
-            <div class="skill-box"><i class='bx bxl-html5'></i><h4>HTML / CSS</h4></div>
-            <div class="skill-box"><i class='bx bxl-python'></i><h4>Python</h4></div>
-            <div class="skill-box"><i class='bx bx-code-alt'></i><h4>C Programming</h4></div>
-            <div class="skill-box"><i class='bx bx-chip'></i><h4>KiCad</h4></div>
-            <div class="skill-box"><i class='bx bx-wrench'></i><h4>Tinkercad</h4></div>
+
+            <div class="skill-box reveal" data-level="Intermediate" data-years="1 year">
+                <i class='bx bxl-html5'></i>
+                <h4>HTML / CSS</h4>
+                <div class="skill-bar"><div class="skill-fill" style="--fill: 65%"></div></div>
+                <span class="skill-tooltip">Intermediate · 1 year</span>
+            </div>
+
+            <div class="skill-box reveal" data-level="Intermediate" data-years="1 year">
+                <i class='bx bxl-python'></i>
+                <h4>Python</h4>
+                <div class="skill-bar"><div class="skill-fill" style="--fill: 60%"></div></div>
+                <span class="skill-tooltip">Intermediate · 1 year</span>
+            </div>
+
+            <div class="skill-box reveal" data-level="Beginner" data-years="6 months">
+                <i class='bx bx-code-alt'></i>
+                <h4>C Programming</h4>
+                <div class="skill-bar"><div class="skill-fill" style="--fill: 45%"></div></div>
+                <span class="skill-tooltip">Beginner · 6 months</span>
+            </div>
+
+            <div class="skill-box reveal" data-level="Beginner" data-years="6 months">
+                <i class='bx bx-chip'></i>
+                <h4>KiCad</h4>
+                <div class="skill-bar"><div class="skill-fill" style="--fill: 40%"></div></div>
+                <span class="skill-tooltip">Beginner · 6 months</span>
+            </div>
+
+            <div class="skill-box reveal" data-level="Beginner" data-years="6 months">
+                <i class='bx bx-wrench'></i>
+                <h4>Tinkercad</h4>
+                <div class="skill-bar"><div class="skill-fill" style="--fill: 50%"></div></div>
+                <span class="skill-tooltip">Beginner · 6 months</span>
+            </div>
+
         </div>
     </section>
 
-    
+    <!-- Contact -->
+    <section class="contact-section" id="contact">
+        <h2 class="heading reveal">Contact <span>Me</span></h2>
+        <div class="contact-wrapper reveal">
+
+            <button class="talk-btn" id="talkBtn">
+                <span class="btn-icon">
+                    <span></span><span></span><span></span>
+                </span>
+                <span class="btn-label" id="btnLabel">Talk To Me</span>
+            </button>
+
+            <div class="icons-ring" id="iconsRing">
+                <a href="https://www.linkedin.com/in/sudhanshu-giri-7b2751405/" class="icon-node icon-li" target="_blank" title="LinkedIn">
+                    <i class='bx bxl-linkedin'></i>
+                </a>
+                <a href="mailto:sudhanshugiri877@gmail.com" class="icon-node icon-gm" title="Gmail">
+                    <i class='bx bxl-gmail'></i>
+                </a>
+                <a href="https://www.instagram.com/daredevilsmuffy?igsh=MW1tMXAxMzU1cWxsMg==" class="icon-node icon-ig" target="_blank" title="Instagram">
+                    <i class='bx bxl-instagram'></i>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2025 Sudhanshu Dattatray Giri &nbsp;·&nbsp; Designed &amp; Built with ♥</p>
+    </footer>
 
     <script>
-        const btn = document.getElementById('talkBtn');
-        const links = document.getElementById('revealLinks');
-        let isOpen = false;
+        /* ── 1. Scroll Progress Bar ── */
+        const progressBar = document.getElementById('scrollProgress');
+        window.addEventListener('scroll', () => {
+            const total = document.documentElement.scrollHeight - window.innerHeight;
+            progressBar.style.width = (window.scrollY / total * 100) + '%';
+        });
 
+        /* ── 2. Header backdrop on scroll ── */
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        /* ── 3. Scroll-spy active nav link ── */
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.navbar a');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(a => a.classList.remove('active'));
+                    const active = document.querySelector(`.navbar a[data-section="${entry.target.id}"]`);
+                    if (active) active.classList.add('active');
+                }
+            });
+        }, { threshold: 0.4 });
+        sections.forEach(s => observer.observe(s));
+
+        /* ── 4. Scroll-triggered fade-in ── */
+        const revealEls = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    // stagger children in the same parent
+                    const siblings = [...entry.target.parentElement.querySelectorAll('.reveal')];
+                    const idx = siblings.indexOf(entry.target);
+                    entry.target.style.transitionDelay = (idx * 0.08) + 's';
+                    entry.target.classList.add('in-view');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        revealEls.forEach(el => revealObserver.observe(el));
+
+        /* ── 5. Contact button toggle ── */
+        const btn = document.getElementById('talkBtn');
+        const ring = document.getElementById('iconsRing');
+        const btnLabel = document.getElementById('btnLabel');
+        let isOpen = false;
         btn.addEventListener('click', () => {
             if (!isOpen) {
-                links.classList.remove('hiding');
-                links.classList.add('active');
+                ring.classList.remove('closing');
+                ring.classList.add('open');
+                btn.classList.add('open');
+                btnLabel.textContent = 'Close';
                 isOpen = true;
             } else {
-                links.classList.remove('active');
-                links.classList.add('hiding');
-                // After the fly-out animation finishes, clean up
-                setTimeout(() => {
-                    links.classList.remove('hiding');
-                }, 600);
+                ring.classList.remove('open');
+                ring.classList.add('closing');
+                btn.classList.remove('open');
+                btnLabel.textContent = 'Talk To Me';
+                setTimeout(() => ring.classList.remove('closing'), 500);
                 isOpen = false;
             }
+        });
+
+        /* ── 6. Project card accent colors by category ── */
+        const accentMap = { Hardware: '#6b8f71', Software: '#5a7fa8' };
+        document.querySelectorAll('.project-box').forEach(box => {
+            const cat = box.dataset.category;
+            const accent = box.querySelector('.project-accent');
+            if (accent && accentMap[cat]) accent.style.background = accentMap[cat];
+            const tag = box.querySelector('.project-tag');
+            if (tag && accentMap[cat]) { tag.style.background = accentMap[cat] + '22'; tag.style.color = accentMap[cat]; }
         });
     </script>
 </body>
