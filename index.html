@@ -9,10 +9,8 @@
 </head>
 <body>
 
-    <!-- Scroll Progress Bar -->
     <div class="scroll-progress" id="scrollProgress"></div>
 
-    <!-- Header -->
     <header class="header" id="header">
         <a href="#home" class="logo">{Sudhanshu Giri}.</a>
         <nav class="navbar">
@@ -24,7 +22,6 @@
         </nav>
     </header>
 
-    <!-- Home -->
     <section class="home" id="home">
         <div class="home-content">
             <h1>Hi. I'm Sudhanshu<br>Dattatray Giri</h1>
@@ -45,7 +42,6 @@
         </div>
     </section>
 
-    <!-- Projects -->
     <section class="projects" id="projects">
         <h2 class="heading reveal">Latest <span>Projects</span></h2>
         <div class="projects-container">
@@ -109,7 +105,6 @@
         </div>
     </section>
 
-    <!-- About -->
     <section class="about" id="about">
         <h2 class="heading reveal">About <span>Me</span></h2>
         <div class="about-container">
@@ -152,7 +147,6 @@
         </div>
     </section>
 
-    <!-- Skills -->
     <section class="skills-section" id="skills">
         <h2 class="heading reveal">My <span>Skills</span></h2>
         <div class="skills-grid">
@@ -195,7 +189,6 @@
         </div>
     </section>
 
-    <!-- Contact -->
     <section class="contact-section" id="contact">
         <h2 class="heading reveal">Contact <span>Me</span></h2>
         <div class="contact-wrapper reveal">
@@ -222,26 +215,22 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <p>© 2025 Sudhanshu Dattatray Giri &nbsp;·&nbsp; Designed &amp; Built with ♥</p>
     </footer>
 
     <script>
-        /* ── 1. Scroll Progress Bar ── */
         const progressBar = document.getElementById('scrollProgress');
         window.addEventListener('scroll', () => {
             const total = document.documentElement.scrollHeight - window.innerHeight;
             progressBar.style.width = (window.scrollY / total * 100) + '%';
         });
 
-        /* ── 2. Header backdrop on scroll ── */
         const header = document.getElementById('header');
         window.addEventListener('scroll', () => {
             header.classList.toggle('scrolled', window.scrollY > 50);
         });
 
-        /* ── 3. Scroll-spy active nav link ── */
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.navbar a');
         const observer = new IntersectionObserver((entries) => {
@@ -255,12 +244,10 @@
         }, { threshold: 0.4 });
         sections.forEach(s => observer.observe(s));
 
-        /* ── 4. Scroll-triggered fade-in ── */
         const revealEls = document.querySelectorAll('.reveal');
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach((entry, i) => {
                 if (entry.isIntersecting) {
-                    // stagger children in the same parent
                     const siblings = [...entry.target.parentElement.querySelectorAll('.reveal')];
                     const idx = siblings.indexOf(entry.target);
                     entry.target.style.transitionDelay = (idx * 0.08) + 's';
@@ -271,7 +258,6 @@
         }, { threshold: 0.15 });
         revealEls.forEach(el => revealObserver.observe(el));
 
-        /* ── 5. Contact button toggle ── */
         const btn = document.getElementById('talkBtn');
         const ring = document.getElementById('iconsRing');
         const btnLabel = document.getElementById('btnLabel');
@@ -293,7 +279,6 @@
             }
         });
 
-        /* ── 6. Project card accent colors by category ── */
         const accentMap = { Hardware: '#6b8f71', Software: '#5a7fa8' };
         document.querySelectorAll('.project-box').forEach(box => {
             const cat = box.dataset.category;
